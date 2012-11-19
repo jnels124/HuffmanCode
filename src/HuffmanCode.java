@@ -1,6 +1,8 @@
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Set;
+import java.util.Iterator;
 
  
 /**
@@ -31,6 +33,9 @@ public class HuffmanCode {
      * @param initialString the initial string used to create the code
      */
     public HuffmanCode(String initialString) {
+        this.seed = initialString;
+        this.codeTree = null;
+        this.codeMap = new HashMap<Character, String>();
     }
     
     /**
@@ -81,7 +86,21 @@ public class HuffmanCode {
      * @return hash map of characters and their frequency in the source
      */
     private HashMap<Character, Integer> createFrequencyMap(String source) {
-        return null;
+        HashMap<Character, Integer> freqMap = new HashMap<Character, Integer>();
+        
+        for(int i = 0; i < source.length(); i++) {
+            
+            if(!freqMap.containsKey(source.charAt(i))) {
+                freqMap.put(source.charAt(i), new Integer(1));
+            }
+            
+            else {
+                int newFreqCount = freqMap.get(source.charAt(i)).intValue();
+                freqMap.put(source.charAt(i), new Integer(newFreqCount + 1));
+            }
+        }
+        
+        return freqMap;
     }
     
     /**
@@ -90,9 +109,23 @@ public class HuffmanCode {
      * @param fm the frequency map
      * 
      * @return a priority queue with values from the frequency map
+     * 
+     * // TO DO: Determine priortiy, and frequency
      */
     private PriorityQueue<HNode> createPriorityQueue(HashMap<Character, Integer> fm) {
-        return null;
+        PriorityQueue<HNode> mapValues = new PriorityQueue<HNode>();
+        Set<Character> fmKeys = fm.keySet();
+        Iterator<Character> itr = fmKeys.iterator();
+        Integer fmNext;
+        Character itrNext;
+       
+        while(itr.hasNext()) {
+            itrNext = itr.next();
+            fmNext = fm.get(itrNext);
+            mapValues.add(new HNode(itrNext, fmNext));
+        }
+        
+        return mapValues;
     }
     
     /**

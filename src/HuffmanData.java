@@ -14,7 +14,7 @@ public class HuffmanData {
     /**
      * Maximum difference to accept two double values as equal.
      */
-    private static double EPSILON;
+    private static final double EPSILON = .5;
     
     /**
      * The frequency stored at this node.
@@ -30,7 +30,9 @@ public class HuffmanData {
      * Simple constructor - set all fields to null or 0.
      */
     public HuffmanData() {
-        
+        this.code = null;
+        this.frq = 0;
+        this.sym = 0;
     }
     
     /**
@@ -39,7 +41,9 @@ public class HuffmanData {
      * @param symbol the symbol
      */
     public HuffmanData(Character symbol) {
-        
+        this.code = null;
+        this.frq = 0;
+        this.sym = symbol;
     } 
     
     /**
@@ -49,7 +53,9 @@ public class HuffmanData {
      * @param frequency the frequency of occurence for the symbol
      */
     public HuffmanData(Character symbol, double frequency) {
-        
+        this.code = null; // use previous constuructor to set up
+        this.frq = frequency;
+        this.sym = symbol;
     } 
     
     /**
@@ -60,7 +66,9 @@ public class HuffmanData {
      * @param code the code for the symbol
      */
     public HuffmanData(Character symbol, double frequency, String code) {
-        
+        this.code = code;
+        this.frq = frequency;
+        this.sym = symbol;
     }
     
     /**
@@ -150,7 +158,7 @@ public class HuffmanData {
      * @param symbol the new symbol
      */
     public void setSymbol(Character symbol) {
-        
+        this.sym = symbol;        
     }
     
     /**

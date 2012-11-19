@@ -14,7 +14,9 @@ public class BTNode<T> implements java.io.Serializable {
      * Constructor that sets value & links to null.
      */
     public BTNode() {
-        
+        this.left = null;        
+        this.right = null;
+        this.value = null;
     }
     
     /**
@@ -23,7 +25,9 @@ public class BTNode<T> implements java.io.Serializable {
      * @param value the value to be stored at this node
      */
     public BTNode(T value) {
-        this.value = value;        
+        this.value = value;  
+        this.right = null;
+        this.left = null;
     }
     
     /**

@@ -6,10 +6,12 @@
  * @version (November 18, 2012 Widows 8 Java 1.7 U9)
  */
 public class HNode extends BTNode<HuffmanData> implements Comparable{ 
+    
     /**
      * Simple constructor - set all fields to null or 0
      */
     public HNode() {
+        super(new HuffmanData());     
         
     }
     
@@ -19,6 +21,7 @@ public class HNode extends BTNode<HuffmanData> implements Comparable{
      * @param symbol the symbol
      */
     public HNode(Character symbol) {
+        super(new HuffmanData(symbol));
     }
     
     /**
@@ -28,6 +31,7 @@ public class HNode extends BTNode<HuffmanData> implements Comparable{
      * @param frequency the frequency of occurence for the symbol
      */
     public HNode(Character symbol, double frequency) {
+        super(new HuffmanData(symbol, frequency));
     }
     
     /**
@@ -38,6 +42,7 @@ public class HNode extends BTNode<HuffmanData> implements Comparable{
      * @param code the code for the symbol
      */
     public HNode(Character symbol, double frequency, String code) {
+        super(new HuffmanData(symbol, frequency, code));
     }
     
     /**
@@ -50,6 +55,7 @@ public class HNode extends BTNode<HuffmanData> implements Comparable{
      * @param right link to the right child
      */
     public HNode(Character symbol, double frequency, String code, HNode left, HNode right) {
+        super(new HuffmanData(symbol, frequency, code), left, right);
     }
     
     /**
@@ -81,7 +87,7 @@ public class HNode extends BTNode<HuffmanData> implements Comparable{
      * @return the code associated with the symbol
      */
     public String getCode() {
-        return null;
+        return super.getValue().getCode();
     }
     
     /**
@@ -90,7 +96,7 @@ public class HNode extends BTNode<HuffmanData> implements Comparable{
      * @return the frequency of occurrence
      */
     public double getFrequency() {
-        return 0.0;
+        return super.getValue().getFrequency();
     }
     
     /**
@@ -99,7 +105,7 @@ public class HNode extends BTNode<HuffmanData> implements Comparable{
      * @return the left child of this node
      */
     public HNode getLeftChild() {
-        return null;
+        return (HNode)super.getLeftChild();
     }
     
     /**
@@ -108,7 +114,7 @@ public class HNode extends BTNode<HuffmanData> implements Comparable{
      * @return the right child of this node
      */
     public HNode getRightChild() {
-        return null;
+        return (HNode)super.getRightChild();
     }
     
     /**
@@ -117,7 +123,7 @@ public class HNode extends BTNode<HuffmanData> implements Comparable{
      * @return the symbol
      */
     public Character getSymbol() {
-        return null;
+        return super.getValue().getSymbol();
     }
     
     /**
@@ -138,6 +144,7 @@ public class HNode extends BTNode<HuffmanData> implements Comparable{
      * @param code the new code
      */
     public void setCode(String code) {
+        super.getValue().setCode(code);
     }
     
     /**
@@ -146,6 +153,7 @@ public class HNode extends BTNode<HuffmanData> implements Comparable{
      * @param code the new frequency
      */
     public void setFrequency(double frequency) {
+        super.getValue().setFrequency(frequency);
     }
     
     /**
@@ -154,5 +162,6 @@ public class HNode extends BTNode<HuffmanData> implements Comparable{
      * @param code the new frequency
      */
     public void setSymbol(Character symbol) {
+        super.getValue().setSymbol(symbol);
     }
 }
