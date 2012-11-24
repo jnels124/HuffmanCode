@@ -62,7 +62,23 @@ public class BTNode<T> implements java.io.Serializable {
      * @return
      */
     public boolean equals(Object obj) {
-        return false;
+        if(this == obj) {
+            return true;
+        }
+        
+        if(obj == null) {
+            return false;
+        }
+        
+        if(getClass() != obj.getClass()) {
+            return false;
+        }
+        
+        BTNode that = (BTNode) obj;
+        //Wrapper classes used when value is a primitive....VERIFY THIS
+        return this.value.equals(that.value) &&
+               this.right.value.equals(that.right.value) &&
+               this.left.value.equals(that.left.value); 
     }
     
     /**
@@ -136,6 +152,7 @@ public class BTNode<T> implements java.io.Serializable {
      * @return object as a string
      */
     public String toString() {
-        return null;
+        return "Left value: " + this.left.value + " ParentValue: " +
+                this.value + " Right value: " + this.right.value;
     }
 }

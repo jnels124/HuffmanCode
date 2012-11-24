@@ -1,18 +1,17 @@
-
+//TODO: Implement HashCode
 /**
  * A node of a Huffman Code Tree
  * 
  * @author (Jesse Nelson) 
  * @version (November 18, 2012 Widows 8 Java 1.7 U9)
  */
-public class HNode extends BTNode<HuffmanData> implements Comparable{ 
+public class HNode extends BTNode<HuffmanData> implements Comparable { 
     
     /**
      * Simple constructor - set all fields to null or 0
      */
     public HNode() {
         super(new HuffmanData());     
-        
     }
     
     /**
@@ -67,7 +66,17 @@ public class HNode extends BTNode<HuffmanData> implements Comparable{
      *         equal to, or greater than the specified object. 
      */
     public int compareTo(Object obj) {
-        return 0;
+        HNode that = (HNode) obj; //Check for null values and throw exception
+   
+        if (this.getValue().getFrequency() > that.getValue().getFrequency()) {
+            return 1;
+        }
+        
+        if(this.getValue().getFrequency() < that.getValue().getFrequency()) {
+            return -1;
+        }
+        
+        return 0; // Objects are equal
     }
     
     /**
@@ -78,7 +87,13 @@ public class HNode extends BTNode<HuffmanData> implements Comparable{
      * @return true if both the symbol and the frequency agree; false otherwise
      */
     public boolean equals(Object o) {
-        return false;
+        if(!super.equals(o)) {
+            return false;
+        }
+        
+        HNode that = (HNode) o;
+        return this.getValue().getFrequency() == that.getValue().getFrequency()
+               && this.getValue().getSymbol().equals(that.getValue().getSymbol()); // Check == with .equals
     }
     
     /**

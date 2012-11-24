@@ -1,4 +1,4 @@
-
+//ToDo: Implement HashCode
 /**
  * Data for Huffman code tree nodes. 
  * 
@@ -14,7 +14,7 @@ public class HuffmanData {
     /**
      * Maximum difference to accept two double values as equal.
      */
-    private static final double EPSILON = .5;
+    private static final double EPSILON = 0.0000005;
     
     /**
      * The frequency stored at this node.
@@ -80,7 +80,15 @@ public class HuffmanData {
      *         equal to, or greater than the specified object.
      */
     public int compareTo(HuffmanData n) {
-        return 0;
+        if(this.frq < n.frq) {
+            return -1;
+        }
+        
+        if(this.frq > n.frq) {
+            return 1;
+        }
+        
+        return 0;         
     }
     
     /**
@@ -91,7 +99,24 @@ public class HuffmanData {
      * @return true if both the symbol and the frequency agree; false otherwise
      */
     public boolean equals(Object o) {
-        return false;
+        if(this == o) {
+            return true;
+        }
+        
+        if(o == null) {
+            return false;
+        }
+        
+        if(getClass() != o.getClass()) {
+            return false; 
+        }
+        
+        // Object is a non-null HuffmanData
+        HuffmanData that = (HuffmanData)o;
+        
+        //Verify symbol and frequency are equal
+        return this.frq == that.frq &&
+               this.sym.equals(that.sym); // Check == with .equals
     }
     
     /**
