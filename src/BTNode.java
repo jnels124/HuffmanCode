@@ -70,15 +70,53 @@ public class BTNode<T> implements java.io.Serializable {
             return false;
         }
         
-        if(getClass() != obj.getClass()) {
+        if(getClass() != obj.getClass()) { // Does this check the type parameter?
             return false;
         }
         
         BTNode that = (BTNode) obj;
-        //Wrapper classes used when value is a primitive....VERIFY THIS
+        // Stopping condition(s) for recursive call
+        if(this.right == null || 
+           this.left == null) {
+            if(this.right == null && 
+               this.left == null) {
+                if(that.right == null && 
+                   that.left == null) {
+                       
+                   return this.value.equals(that.value);
+                }
+                return false;     // else?
+            }
+            else if(this.right == null) {
+                if(that.right == null) {
+                    return this.value.equals(that.value) &&
+                           this.left.equals(that.left);                    
+                }
+                return false;      // else?   
+            }
+            else {
+                if(that.left == null) {
+                    return this.value.equals(that.value) &&
+                           this.right.equals(that.right);
+                }
+                return false;   // else?
+            }
+        } 
+        
         return this.value.equals(that.value) &&
-               this.right.value.equals(that.right.value) &&
-               this.left.value.equals(that.left.value); 
+               this.right.equals(that.right) &&
+               this.left.equals(that.left); 
+      
+        /* Stopping condition for recursive call
+        if(this.right == null && this.left == null &&
+           that.right == null && that.right == null) {
+           if(this.value == that.value) {
+               return true;
+           }
+           return false;
+        }*/
+        //Wrapper classes used when value is a primitive....VERIFY THIS
+        
     }
     
     /**
@@ -89,7 +127,8 @@ public class BTNode<T> implements java.io.Serializable {
      * @return a hash code value for this object
      */
     public int hashCode() {
-        return 0;
+        return 7 * value.hashCode() +
+               11;
     }
     
     /**
