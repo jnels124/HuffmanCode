@@ -125,6 +125,20 @@ public class HuffmanCode {
             mapValues.add(new HNode(itrNext, fmNext));
         }
         
+        for(int i = 1; i <= mapValues.size(); i++) {
+            HNode leftChild = mapValues.poll();
+            HNode rightChild = mapValues.poll();
+            HNode parent = new HNode();/*(null, leftChild.getFrequency() + 
+                                           rightChild.getFrequency(),
+                                           leftChild, rightChild);*/
+            parent.setLeftChild(leftChild);
+            parent.setRightChild(rightChild);
+            parent.setFrequency(leftChild.getFrequency() + 
+                                rightChild.getFrequency());
+            
+            mapValues.add(parent);
+        }
+        
         return mapValues;
     }
     
