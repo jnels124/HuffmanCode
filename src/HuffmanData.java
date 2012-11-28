@@ -116,7 +116,7 @@ public class HuffmanData {
         
         //Verify symbol and frequency are equal
         return this.frq == that.frq &&
-               this.sym.equals(that.sym); // Check == with .equals
+               this.sym == that.sym; 
     }
     
     /**

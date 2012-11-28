@@ -78,15 +78,18 @@ public class BTNode<T> implements java.io.Serializable {
         // Stopping condition(s) for recursive call
         if(this.right == null || 
            this.left == null) {
+            
             if(this.right == null && 
                this.left == null) {
+                   
                 if(that.right == null && 
                    that.left == null) {
-                       
+                      
                    return this.value.equals(that.value);
                 }
                 return false;     // else?
             }
+            
             else if(this.right == null) {
                 if(that.right == null) {
                     return this.value.equals(that.value) &&
@@ -94,6 +97,7 @@ public class BTNode<T> implements java.io.Serializable {
                 }
                 return false;      // else?   
             }
+            
             else {
                 if(that.left == null) {
                     return this.value.equals(that.value) &&
