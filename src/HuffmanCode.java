@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
-import java.util.Iterator;
+import java.util.Iterator; 
 
 /**
  * Driver to create Huffman codes and encoded strings. 
@@ -45,7 +45,29 @@ public class HuffmanCode {
      * @return the decoded string
      */
     public String decode(String encoded) {
-        return null;
+        if(encoded == null || this.codeTree == null) {
+            return "";
+        }
+        
+        String decoded = "";
+        HNode currentParent = this.codeTree;
+        
+        for(int i = 0; i < encoded.length(); i++) {
+            if(encoded.charAt(i) == ('1')) { // .equals?
+                currentParent = currentParent.getRightChild();
+            }
+            
+            else {
+                currentParent = currentParent.getLeftChild();
+            }
+            
+            if(currentParent.getLeftChild() == null &&
+               currentParent.getRightChild() == null) {
+                decoded += currentParent.getSymbol();
+                currentParent = this.codeTree;
+            }
+        }
+        return decoded;
     }
     
     /**
@@ -56,7 +78,18 @@ public class HuffmanCode {
      * @return the encoded string
      */
     public String encode(String clearText) {
-        return null;
+        String encoded = "";
+        for(int i = 0; i < clearText.length(); i++) {
+            if(!this.codeMap.containsKey(clearText.charAt(i))) {
+                javax.swing.JOptionPane.showMessageDialog
+                (null, "You have attempted to encode a string " +
+                       "that contains a letter, or letters, that " +
+                       "have not been included in the orignal message");
+                return "";
+            }
+            encoded += codeMap.get(clearText.charAt(i));            
+        }
+        return encoded;
     }
     
     /**
@@ -109,7 +142,6 @@ public class HuffmanCode {
      * 
      * @return a priority queue with values from the frequency map
      * 
-     * // TO DO: Determine priortiy, and frequency
      */
     private PriorityQueue<HNode> createPriorityQueue(HashMap<Character, Integer> fm) {
         PriorityQueue<HNode> mapValues = new PriorityQueue<HNode>();
@@ -133,11 +165,11 @@ public class HuffmanCode {
      * @param hh the priority queue with data for the Huffman Code
      */
     private void createCodeTree(PriorityQueue<HNode> hh) {
-        int qSize = hh.size();
         HNode rightChild;
         HNode leftChild;
         HNode parent;
         
+        int qSize = hh.size();
         for(int i = 1; i <= qSize - 1; i++) {// Check set left and right child are correct to use
             rightChild = hh.poll();
             leftChild = hh.poll();
