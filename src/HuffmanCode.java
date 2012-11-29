@@ -4,7 +4,6 @@ import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.Iterator;
 
- 
 /**
  * Driver to create Huffman codes and encoded strings. 
  * 
@@ -124,21 +123,7 @@ public class HuffmanCode {
             fmNext = fm.get(itrNext);
             mapValues.add(new HNode(itrNext, fmNext));
         }
-        
-        for(int i = 1; i <= mapValues.size(); i++) {
-            HNode leftChild = mapValues.poll();
-            HNode rightChild = mapValues.poll();
-            HNode parent = new HNode();/*(null, leftChild.getFrequency() + 
-                                           rightChild.getFrequency(),
-                                           leftChild, rightChild);*/
-            parent.setLeftChild(leftChild);
-            parent.setRightChild(rightChild);
-            parent.setFrequency(leftChild.getFrequency() + 
-                                rightChild.getFrequency());
-            
-            mapValues.add(parent);
-        }
-        
+ 
         return mapValues;
     }
     
@@ -148,6 +133,21 @@ public class HuffmanCode {
      * @param hh the priority queue with data for the Huffman Code
      */
     private void createCodeTree(PriorityQueue<HNode> hh) {
+        int qSize = hh.size();
+        HNode rightChild;
+        HNode leftChild;
+        HNode parent;
+        
+        for(int i = 1; i <= qSize - 1; i++) {// Check set left and right child are correct to use
+            rightChild = hh.poll();
+            leftChild = hh.poll();
+            parent = new HNode(null, leftChild.getFrequency() + 
+                                     rightChild.getFrequency(),
+                               null, leftChild, rightChild);
+            hh.add(parent);
+        }
+        
+        this.codeTree = hh.poll();       
     }
     
     /**
@@ -156,6 +156,17 @@ public class HuffmanCode {
      * @param root the root of a Huffman Code subtree
      */
     private void growCodeMap(HNode root) {
+        if(root == null) {
+            return;
+        }
+        
+        if(root.getRightChild() == null && 
+           root.getLeftChild() == null) {
+            this.codeMap.put(root.getSymbol(), root.getCode());
+        }
+        
+        growCodeMap(root.getRightChild());
+        growCodeMap(root.getLeftChild());
     }
     
     /**
@@ -165,5 +176,12 @@ public class HuffmanCode {
      * @param code the code to set at the root 
      */
     private void setCodes(HNode root, String code) {
+        if(root == null) {
+            return;
+        }
+        
+        root.setCode(code);
+        setCodes(root.getLeftChild(), code + "0");
+        setCodes(root.getRightChild(), code + "1");
     }
 }
