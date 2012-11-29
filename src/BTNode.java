@@ -38,7 +38,7 @@ public class BTNode<T> implements java.io.Serializable {
      * @param rightChild the link to the right child
      */
     public BTNode(T value, BTNode<T> leftChild, BTNode<T> rightChild ) {
-        this.left= leftChild; 
+        this.left = leftChild; 
         this.right = rightChild;
         this.value = value;
     }
@@ -70,7 +70,7 @@ public class BTNode<T> implements java.io.Serializable {
             return false;
         }
         
-        if(getClass() != obj.getClass()) { // Does this check the type parameter?
+        if(this.getClass() != obj.getClass()) { // Does this check the type parameter?
             return false;
         }
         
@@ -131,22 +131,7 @@ public class BTNode<T> implements java.io.Serializable {
             }*/
         
     } 
-        
-         
-      
-        /* Stopping condition for recursive call
-        if(this.right == null && this.left == null &&
-           that.right == null && that.right == null) {
-           if(this.value == that.value) {
-               return true;
-           }
-           return false;
-        }*/
-        //Wrapper classes used when value is a primitive....VERIFY THIS
-        
-    
-    //}
-    
+
     /**
      * Define hashcode for BTNodes. 
      * <p> If two objects are equal according to the equals(Object) method, then calling the hashCode

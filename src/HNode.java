@@ -68,11 +68,11 @@ public class HNode extends BTNode<HuffmanData> implements Comparable {
     public int compareTo(Object obj) {
         HNode that = (HNode) obj; //Check for null values and throw exception
    
-        if (this.getValue().getFrequency() > that.getValue().getFrequency()) {
+        if (super.getValue().getFrequency() > that.getValue().getFrequency()) {
             return 1;
         }
         
-        if(this.getValue().getFrequency() < that.getValue().getFrequency()) {
+        if(super.getValue().getFrequency() < that.getValue().getFrequency()) {
             return -1;
         }
         
@@ -87,13 +87,26 @@ public class HNode extends BTNode<HuffmanData> implements Comparable {
      * @return true if both the symbol and the frequency agree; false otherwise
      */
     public boolean equals(Object o) {
-        if(!super.equals(o)) {
+        if(this == o) {
+            return true;
+        }
+        
+        if(o == null) {
+            return false;
+        }
+        
+        if(getClass() != o.getClass()) { // Does this check the type parameter?
             return false;
         }
         
         HNode that = (HNode) o;
-        return this.getValue().getFrequency() == that.getValue().getFrequency()
-               && this.getValue().getSymbol().equals(that.getValue().getSymbol()); // Check == with .equals
+        if(this.getValue().getSymbol() != null) {
+            return this.getValue().getFrequency() == that.getValue().getFrequency()
+                   && this.getValue().getSymbol().equals(that.getValue().getSymbol());
+        }   
+        
+        return that.getValue().getSymbol() == null &&
+               this.getValue().getFrequency() == that.getValue().getFrequency();
     }
     
     /**

@@ -80,6 +80,7 @@ public class HuffmanCode {
     public String encode(String clearText) {
         String encoded = "";
         for(int i = 0; i < clearText.length(); i++) {
+            
             if(!this.codeMap.containsKey(clearText.charAt(i))) {
                 javax.swing.JOptionPane.showMessageDialog
                 (null, "You have attempted to encode a string " +
@@ -87,6 +88,7 @@ public class HuffmanCode {
                        "have not been included in the orignal message");
                 return "";
             }
+            
             encoded += codeMap.get(clearText.charAt(i));            
         }
         return encoded;
