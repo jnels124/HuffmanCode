@@ -75,8 +75,32 @@ public class BTNode<T> implements java.io.Serializable {
         }
         
         BTNode that = (BTNode) obj;
+        if(this.right != that.right) {
+            return false;
+        }
+        
+        if(this.left != that.left) {
+            return false;
+        }
+        
+        if(this.right == null) {
+            if(this.left == null) {
+                return this.value.equals(that.value);
+            }
+            return this.value.equals(that.value) &&
+                   this.left.equals(that.left);
+        }
+        
+        if(this.left == null) {
+            return this.value.equals(that.value) &&
+                   this.right.equals(that.left);
+        }
+        
+        return this.value.equals(that.value) &&
+               this.right.equals(that.right) &&
+               this.left.equals(that.left);
         // Stopping condition(s) for recursive call
-        if(this.right == null || 
+        /*if(this.right == null || 
            this.left == null) {
             
             if(this.right == null && 
@@ -104,12 +128,11 @@ public class BTNode<T> implements java.io.Serializable {
                            this.right.equals(that.right);
                 }
                 return false;   // else?
-            }
-        } 
+            }*/
         
-        return this.value.equals(that.value) &&
-               this.right.equals(that.right) &&
-               this.left.equals(that.left); 
+    } 
+        
+         
       
         /* Stopping condition for recursive call
         if(this.right == null && this.left == null &&
@@ -121,7 +144,8 @@ public class BTNode<T> implements java.io.Serializable {
         }*/
         //Wrapper classes used when value is a primitive....VERIFY THIS
         
-    }
+    
+    //}
     
     /**
      * Define hashcode for BTNodes. 
