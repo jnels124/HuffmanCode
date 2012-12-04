@@ -85,7 +85,7 @@ public class HuffmanCode {
                 javax.swing.JOptionPane.showMessageDialog
                 (null, "You have attempted to encode a string " +
                        "that contains a letter, or letters, that " +
-                       "have not been included in the orignal message");
+                       "have not been included in the orignal seed");
                 return "";
             }
             

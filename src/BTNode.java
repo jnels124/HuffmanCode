@@ -75,30 +75,89 @@ public class BTNode<T> implements java.io.Serializable {
         }
         
         BTNode that = (BTNode) obj;
-        if(this.right != that.right) {
+        if(this.right != that.right || 
+           this.left != that.left   ||
+           this.value != that.value) {
             return false;
         }
         
-        if(this.left != that.left) {
-            return false;
-        }
+        if(this.right == null && this.left == null && this.value == null) {
+            return true;
+        } 
         
-        if(this.right == null) {
+        if(this.value == null) {
+            if(this.left == null) {
+                return this.right.equals(that.right);
+            }
+            
+            if(this.right == null) {
+                return this.left.equals(that.left);
+            }
+            
+            return this.right.equals(that.right) &&
+                   this.left.equals(that.left);
+        }
+         
+        if(this.right == null ) {
             if(this.left == null) {
                 return this.value.equals(that.value);
             }
-            return this.value.equals(that.value) &&
+            return this.value.equals(that.value) && 
                    this.left.equals(that.left);
         }
         
+       
         if(this.left == null) {
             return this.value.equals(that.value) &&
-                   this.right.equals(that.left);
+                   this.right.equals(that.right);        
         }
         
+        
+        /*if(this.value == null) {
+            if(this.left == null) {
+                return this.left.equals(that.left);
+            }
+            
+            return this.left.equals(that.left);         
+            
+            //if(this.left == null && th
+            /*if(this.left == null) {
+                return this.right.equals(that.right);
+            }
+            
+            return this.left.equals(that.left);*/
+       
+        //}
+        
+        /*if(this.left == null) {
+            return this.value.equals(that.value) &&
+                   this.right.equals(that.left);
+        }*/
+        
+   
+        
+        /*if(this.right == null && this.left == null  this.value == null) {
+            return true;
+        }*/
+   
+        /*if(this.right == null) {
+            return this.value.equals(that.value) &&
+                   this.left.equals(that.left);
+        }*/
+        
         return this.value.equals(that.value) &&
-               this.right.equals(that.right) &&
-               this.left.equals(that.left);
+                   this.right.equals(that.right) &&
+                   this.left.equals(that.left);
+        
+        
+        
+        //if(this.value != null) {
+            
+        //}
+        
+        /*return this.right.equals(that.right) &&
+               this.left.equals(that.left);  */      
+        
         // Stopping condition(s) for recursive call
         /*if(this.right == null || 
            this.left == null) {
