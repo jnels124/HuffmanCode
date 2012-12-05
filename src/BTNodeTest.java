@@ -149,10 +149,15 @@ public class BTNodeTest {
     public void testEquals() {
         assertTrue(testNoParam.equals(testNoParam));     
         assertFalse(testNoParam.equals(null));
-        assertFalse(testNoParam.equals(new String(" ")));
-        assertTrue(testNoParam.equals(new BTNode<Integer>(null)));
+        assertFalse(testNoParam.equals(new BTNode<Character>('a')));
+        assertFalse(new BTNode<String>(" ").equals(testNoParam));
+        assertTrue(testNoParam.equals(new BTNode<Integer>(null))); // Caused additonal if statements
+        assertFalse(testNoParam.equals(test1));
+        assertTrue(new BTNode<String>(null).equals(testNoParam));
         
+        assertFalse(test1.equals(testNoParam)); 
         
+             
         
         
         
